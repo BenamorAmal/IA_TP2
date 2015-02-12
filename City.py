@@ -21,3 +21,19 @@ class City:
 
 	def __repr__(self):
 		return "%s : (%s, %s)" % (self._name, self._x, self._y)
+
+	@property
+	def x(self):
+		return self._x
+
+	@x.setter
+	def x(self, value):
+		self._x = value
+
+	@property
+	def y(self):
+		return self._y
+
+	@y.setter
+	def y(self, value):
+		self._y = value

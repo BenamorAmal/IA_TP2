@@ -9,7 +9,7 @@ class City:
 
 		if name is None:
 			City.counter += 1
-			self._name = "Ville " + City.counter
+			self._name = "Ville %s" % City.counter
 		else:
 			self._name = name
 
@@ -18,3 +18,6 @@ class City:
 
 	def getName(self):
 		return self._name
+
+	def __repr__(self):
+		return "%s : (%s, %s)" % (self._name, self._x, self._y)

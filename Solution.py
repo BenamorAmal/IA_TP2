@@ -9,7 +9,7 @@ class Solution:
 	def evaluate(self):
 		length = 0
 		for i in range(len(self._cities)-1):
-			print(i)
+			# print(i)
 			cityA = self._cities[i]
 			cityB = self._cities[i+1]
 			length += getPythagoreDistance(cityA, cityB)

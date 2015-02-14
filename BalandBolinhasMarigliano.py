@@ -32,12 +32,12 @@ def ga_solve(filename=None, gui=True, maxtime=0):
 		crossed = crossover(selected)
 
 
-		print("mutation: %s" % mutation(crossed))
-		print("crossed %s: " % crossed)
-		print("selected %s: " % selected)
+		# print("mutation: %s" % mutation(crossed))
+		# print("crossed %s: " % crossed)
+		# print("selected %s: " % selected)
 		pop1 = mutation(crossed)
 		pop1.extend(crossed)
-		print("pop1 %s: " % pop1)
+		# print("pop1 %s: " % pop1)
 		pop1.extend(selected)
 		population = pop1
 	bestSolution = population[0]
@@ -57,8 +57,9 @@ def mutateSolution(solution):
 	for i in range(len(newSolution)):
 
 		prob = randrange(100)
-		if prob < SWAP_PROB:
+		if prob <= SWAP_PROB:
 			swapTarget = randrange(len(solution))
+			print("swapTarget: %s" % swapTarget)
 			newSolution[i], newSolution[swapTarget] = newSolution[swapTarget], newSolution[i]
 	return newSolution
 
@@ -82,7 +83,7 @@ def generatePopulation(cities, n):
 		path = generateRandomPath(cities)
 		population.append(path)
 		i+=1
-	print(population)
+	# print(population)
 	return population
 
 
@@ -188,3 +189,22 @@ if __name__ == '__main__':
 
 	## affichage en "temps réel" de l'évolution du meilleur chemin
 	ga_solve(filename, not nogui, maxtime)
+
+	# cities = []
+	# c1 = City(0, 0)
+	# c2 = City(0, 5)
+	# c3 = City(0, 10)
+	# c4 = City(0, 15)
+	# cities.append(c1)
+	# cities.append(c2)
+	# cities.append(c3)
+	# cities.append(c4)
+	#
+	# solution = Solution(cities)
+
+	# a = 0
+	# while a < 10:
+	# 	#print("solution: %s" % solution)
+	# 	solutionMutated = mutateSolution(solution)
+	# 	print("solution: %s" % solutionMutated)
+	# 	a += 1

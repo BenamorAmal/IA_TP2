@@ -12,13 +12,6 @@ city_radius = 3
 
 font_color = [255,255,255] # white
 
-pygame.init()
-window = pygame.display.set_mode((screen_x, screen_y))
-pygame.display.set_caption('Exemple')
-screen = pygame.display.get_surface()
-font = pygame.font.Font(None,30)
-
-
 def getCitiesPoints():
 	cities = []
 	draw(cities)
@@ -50,16 +43,18 @@ def draw(cities):
 
 
 
-def drawPath(cities):
+def drawPath(cities, length):
 	screen.fill(0)
 	pygame.draw.lines(screen,city_color,True,cities)
-	text = font.render("Un chemin, pas le meilleur!", True, font_color)
+	text = font.render("Meilleur chemin actuel %s" % length, True, font_color)
 	textRect = text.get_rect()
 	screen.blit(text, textRect)
 	pygame.display.flip()
 
-	while True:
-		event = pygame.event.wait()
-		if event.type == KEYDOWN: break
-
-
+def showGUI():
+	global window, screen, font
+	pygame.init()
+	window = pygame.display.set_mode((screen_x, screen_y))
+	pygame.display.set_caption('Exemple')
+	screen = pygame.display.get_surface()
+	font = pygame.font.Font(None, 30)

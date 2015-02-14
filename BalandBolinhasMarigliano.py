@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import optparse
+#from pydoc import GUI
 import GUI_example
 from City import City
 from random import randrange, choice, shuffle
@@ -16,51 +17,60 @@ SWAP_PROB = 10
 def ga_solve(filename=None, gui=True, maxtime=0):
 	## Saisie des villes ou lecture depuis un fichier
 	cities = []
-	startTime = time.time()
 
+	startTime = time.time()
+	maxtime = maxtime*0.9
 	if filename is None:
 		cities = getCitiesFromGUI()
+		startTime = time.time()
 	else:
 		cities = parseCitiesFromFile(filename)
 
 	# début de l'algorithme
 	population = generatePopulation(cities, N)
 
-	while time.time() - startTime < maxtime:
+	bestSolution = Solution(population[0])
+	if gui:
+		GUI_example.showGUI()
+
+
+	while not isTimeout(startTime, maxtime):
 		selected = selection(population)
-
-		crossed = crossover(selected)
-
-
-		# print("mutation: %s" % mutation(crossed))
-		# print("crossed %s: " % crossed)
-		# print("selected %s: " % selected)
+		if isTimeout(startTime, maxtime):
+			break
+		crossed = crossover(selected, startTime, maxtime)
+		if isTimeout(startTime, maxtime):
+			break
 		pop1 = mutation(crossed)
 		pop1.extend(crossed)
-		# print("pop1 %s: " % pop1)
 		pop1.extend(selected)
 		population = pop1
-	bestSolution = population[0]
 
-	for solution in population:
-		if solution.evaluation < bestSolution.evaluation:
-			bestSolution = solution
+		for solution in population:
 
-	print("bestSolution: %s" % bestSolution)
+			if isTimeout(startTime, maxtime):
+				break
+			if solution.evaluation < bestSolution.evaluation:
+				bestSolution = solution
+		if gui:
+			GUI_example.drawPath(bestSolution.getPoints(), bestSolution.evaluation)
 
-	lenght = 0
-	path = "toto"
+
+	lenght = bestSolution.evaluation
+	path = bestSolution.getCities()
 	return lenght, path
+
+def isTimeout(startTime, maxTime):
+	return time.time() - startTime > maxTime
 
 def mutateSolution(solution):
 	newSolution = copy.deepcopy(solution)
 	for i in range(len(newSolution)):
-
 		prob = randrange(100)
 		if prob <= SWAP_PROB:
 			swapTarget = randrange(len(solution))
-			print("swapTarget: %s" % swapTarget)
 			newSolution[i], newSolution[swapTarget] = newSolution[swapTarget], newSolution[i]
+	newSolution.evaluate()
 	return newSolution
 
 
@@ -71,7 +81,8 @@ def mutation(population):
 	for solution in population:
 		prob = randrange(100)
 		if  prob < MUTATION_PROB:
-			mutatedPopulation.append(mutateSolution(solution))
+			mutatedSolution = mutateSolution(solution)
+			mutatedPopulation.append(mutatedSolution)
 	return mutatedPopulation
 
 
@@ -83,7 +94,6 @@ def generatePopulation(cities, n):
 		path = generateRandomPath(cities)
 		population.append(path)
 		i+=1
-	# print(population)
 	return population
 
 
@@ -92,7 +102,6 @@ def generateRandomPath(cities):
 	:param cities:
 	:return: a path like this: "1-5-6-4" as Solution object
 	"""
-	nbCities = len(cities)
 	return Solution(scrambled(cities))
 
 def scrambled(orig):
@@ -110,12 +119,12 @@ def selection(population):
 
 
 	for solution in population:
-		if solution.evaluation >= average:
+		#-1 Corrige une erreur de suppression de résultats lorsque la moyenne est fixée
+		if solution.evaluation >= average/(20*19):
 			selected.append(solution)
-
 	return selected
 
-def crossover(population):
+def crossover(population, startTime, maxTime):
 	"""
 	croisement en un points
 	"""
@@ -125,8 +134,13 @@ def crossover(population):
 	for i in range(0,len(population)//2, 2):
 		parent1 = population[i]
 		parent2 = population[i+1]
-		child = []
-		child.append(parent1[0])
+		child = Solution([])
+		child.add(parent1[0])
+		indexList = [x for x in range(len(parent1))]
+
+		if isTimeout(startTime,maxTime):
+			break
+
 
 		for value in range(1,len(parent1)):
 			distance1 = getPythagoreDistance(child[-1],parent1[value])
@@ -137,20 +151,20 @@ def crossover(population):
 			else:
 				first, second = parent2[value], parent1[value]
 
-			if (first not in child) :
-				child.append(first)
-			elif (second not in child) :
-				child.append(second)
+			if not child.contains(first):
+				child.add(first)
+			elif not child.contains(second) :
+				child.add(second)
 			else :
-				#TODO Ameliorer Temps
-				idx = randrange(len(parent1))
+				idx = choiceAndRemove(indexList)
 				city = parent1[idx]
 				while city in child:
-					idx = randrange(len(parent1))
-					city = parent1[idx]
-				child.append(city)
 
-		crossed.append(Solution(child))
+					idx = choiceAndRemove(indexList)
+					city = parent1[idx]
+				child.add(city)
+
+		crossed.append(child)
 
 	# Ajout Dernier Parent si liste Impair
 	if len(population)%2 == 1:
@@ -159,7 +173,10 @@ def crossover(population):
 	return crossed
 
 
-
+def choiceAndRemove(indexList):
+	choiced = choice(indexList)
+	indexList.remove(choiced)
+	return choiced
 
 def parseCitiesFromFile(filename):
 	cities = []
@@ -170,12 +187,13 @@ def parseCitiesFromFile(filename):
 	return cities
 
 def getCitiesFromGUI():
+	GUI_example.showGUI()
 	return GUI_example.getCitiesPoints()
 
 if __name__ == '__main__':
 	parser = optparse.OptionParser()
 	parser.add_option('--nogui', action="store_true", default=False)
-	parser.add_option('--maxtime', action="store", type="int", default=1)
+	parser.add_option('--maxtime', action="store", type="int", default=10)
 
 	(opts, args) = parser.parse_args()
 
@@ -183,28 +201,7 @@ if __name__ == '__main__':
 	maxtime = opts.__dict__["maxtime"]
 	filename = args[0] if len(args) > 0 else None
 
-	# print(nogui)
-	# print(maxtime)
-	# print(filename)
 
 	## affichage en "temps réel" de l'évolution du meilleur chemin
 	ga_solve(filename, not nogui, maxtime)
 
-	# cities = []
-	# c1 = City(0, 0)
-	# c2 = City(0, 5)
-	# c3 = City(0, 10)
-	# c4 = City(0, 15)
-	# cities.append(c1)
-	# cities.append(c2)
-	# cities.append(c3)
-	# cities.append(c4)
-	#
-	# solution = Solution(cities)
-
-	# a = 0
-	# while a < 10:
-	# 	#print("solution: %s" % solution)
-	# 	solutionMutated = mutateSolution(solution)
-	# 	print("solution: %s" % solutionMutated)
-	# 	a += 1

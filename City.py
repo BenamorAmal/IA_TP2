@@ -22,6 +22,9 @@ class City:
 	def __repr__(self):
 		return "%s : (%s, %s)" % (self._name, self._x, self._y)
 
+	def __hash__(self):
+		return self._name
+
 	@property
 	def x(self):
 		return self._x
@@ -37,3 +40,17 @@ class City:
 	@y.setter
 	def y(self, value):
 		self._y = value
+
+	@property
+	def name(self):
+		return self._name
+
+	@name.setter
+	def name(self, value):
+		self._name = value
+
+	def __eq__(self,city):
+		return self._x ==city._x and self._y == city._y and self._name == city._name
+
+	def __ne__(self,city):
+		return not self.__eq__(city)

@@ -17,10 +17,8 @@ v0.3, Hatem Ghorbel, HE-Arc
 # Le nom des modules à tester
 # Ces modules doivent être dans le PYTHONPATH; p.ex. dans le répertoire courant
 
-modules = (
-	#"MAA09",
-	"BalandBolinhasMarigliano",
-	# Éventuellement d'autres modules pour comparer plusieurs versions...
+modules = (  # "MAA09",
+             "BalandBolinhasMarigliano",  # Éventuellement d'autres modules pour comparer plusieurs versions...
 )
 
 # Liste des tests à effectuer 
@@ -28,13 +26,13 @@ modules = (
 # <datafile> est le fichier contenant les données du problème et
 # <maxtime> le temps (en secondes) imparti pour la résolution
 tests = (
-    ('data/pb005.txt',1),
-    ('data/pb010.txt',5),
-    ('data/pb010.txt',10),
-    #('data/pb050.txt',30),
-    #('data/pb050.txt',60),
-    #('data/pb100.txt',20),
-    #('data/pb100.txt',90),
+    ('data/pb005.txt', 1),
+    ('data/pb010.txt', 5),
+    ('data/pb010.txt', 10),
+    ('data/pb050.txt', 30),
+    ('data/pb050.txt', 60),
+    ('data/pb100.txt', 20),
+    ('data/pb100.txt', 90),
 )
 
 # On tolère un dépassement de 5% du temps imparti:
@@ -42,9 +40,10 @@ tolerance = 0.05
 
 # Fichier dans lequel écrire les résultats
 import sys
+
 outfile = sys.stdout
 # ou :
-#outfile = open('results.csv', 'w')
+# outfile = open('results.csv', 'w')
 
 # affichage à la console d'informations d'avancement?
 verbose = False
@@ -60,28 +59,30 @@ import os
 from time import time
 from math import hypot
 
-def dist(x1,y1,x2,y2):
-    return hypot(x2 -x1,y2-y1)
+
+def dist(x1, y1, x2, y2):
+    return hypot(x2 - x1, y2 - y1)
+
 
 def validate(filename, length, path, duration, maxtime):
     '''Validation de la solution
-    
+
     retourne une chaîne vide si tout est OK ou un message d'erreur sinon
     '''
     error = ""
-    
-    if duration>maxtime * (1+tolerance):
-        error += "Timeout (%.2f) " % (duration-maxtime)
+
+    if duration > maxtime * (1 + tolerance):
+        error += "Timeout (%.2f) " % (duration - maxtime)
     try:
-        cities = dict([(name, (int(x),int(y))) for name,x,y in [l.split() for l in open(filename)]])
+        cities = dict([(name, (int(x), int(y))) for name, x, y in [l.split() for l in open(filename)]])
     except Exception as e:
         print(e)
         return "(Validation failed...)"
     tovisit = list(cities.keys())
     try:
         totaldist = 0
-        for (ci, cj) in zip(path, path[1:] +path[0:1]):
-            totaldist += dist(cities[ci][0],cities[ci][1],cities[cj][0],cities[cj][1])
+        for (ci, cj) in zip(path, path[1:] + path[0:1]):
+            totaldist += dist(cities[ci][0], cities[ci][1], cities[cj][0], cities[cj][1])
             tovisit.remove(ci)
 
         if int(totaldist) != int(length):
@@ -95,9 +96,8 @@ def validate(filename, length, path, duration, maxtime):
 
     if tovisit:
         error += "Not all cities visited! %r" % tovisit
-    
-    return error
 
+    return error
 
 
 if __name__ == '__main__':
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     outfile.write('Test;')
 
     for m in modules:
-        exec ("from %s import ga_solve" % m)
+        exec("from %s import ga_solve" % m)
         solvers[m] = ga_solve
         outfile.write("%s;" % m)
 
@@ -120,22 +120,22 @@ if __name__ == '__main__':
     # et rapporte les résultats dans outfile
 
     for (filename, maxtime) in tests:
-        if verbose: 
-            print ("--> %s, %d" % (filename, maxtime))
+        if verbose:
+            print("--> %s, %d" % (filename, maxtime))
         # normalisation du nom de fichier (pour l'aspect multi-plateforme)
         filename = os.path.normcase(os.path.normpath(filename))
         # Écriture de l'en-tête de ligne
         outfile.write("%s (%ds);" % (filename, maxtime))
         # Appel des solveurs proprement dits, vérification et écriture des résultats
         for m in modules:
-            if verbose: 
-                print ("## %s" % m)
+            if verbose:
+                print("## %s" % m)
             try:
                 start = time()
                 length, path = solvers[m](filename, gui, maxtime)
-                duration = time()-start
+                duration = time() - start
             except Exception as e:
-                    outfile.write("%r;" % e)
+                outfile.write("%r;" % e)
             except SystemExit:
                 outfile.write("tried to quit!;")
             else:

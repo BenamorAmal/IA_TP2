@@ -3,58 +3,60 @@ from City import City
 from pygame.locals import KEYDOWN, QUIT, MOUSEBUTTONDOWN, K_RETURN, K_ESCAPE
 import sys
 
-## globals
+# # globals
 screen_x = 500
 screen_y = 500
 
-city_color = [10,10,200] # blue
+city_color = [10, 10, 200]  # blue
 city_radius = 3
 
-font_color = [255,255,255] # white
+font_color = [255, 255, 255]  # white
+
 
 def getCitiesPoints():
-	cities = []
-	draw(cities)
+    cities = []
+    draw(cities)
 
-	collecting = True
+    collecting = True
 
-	while collecting:
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				sys.exit(0)
-			elif event.type == KEYDOWN and event.key == K_RETURN:
-				collecting = False
-			elif event.type == MOUSEBUTTONDOWN:
-				pos = pygame.mouse.get_pos()
-				city = City(pos[0], pos[1])
-				cities.append(city)
-				draw(cities)
+    while collecting:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                sys.exit(0)
+            elif event.type == KEYDOWN and event.key == K_RETURN:
+                collecting = False
+            elif event.type == MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                city = City(pos[0], pos[1])
+                cities.append(city)
+                draw(cities)
 
-	return cities
+    return cities
+
 
 def draw(cities):
-	screen.fill(0)
-	for city in cities:
-		pygame.draw.circle(screen,city_color,city.getPos(),city_radius)
-	text = font.render("Nombre: %i" % len(cities), True, font_color)
-	textRect = text.get_rect()
-	screen.blit(text, textRect)
-	pygame.display.flip()
-
+    screen.fill(0)
+    for city in cities:
+        pygame.draw.circle(screen, city_color, city.getPos(), city_radius)
+    text = font.render("Nombre: %i" % len(cities), True, font_color)
+    textRect = text.get_rect()
+    screen.blit(text, textRect)
+    pygame.display.flip()
 
 
 def drawPath(cities, length):
-	screen.fill(0)
-	pygame.draw.lines(screen,city_color,True,cities)
-	text = font.render("Meilleur chemin actuel %s" % length, True, font_color)
-	textRect = text.get_rect()
-	screen.blit(text, textRect)
-	pygame.display.flip()
+    screen.fill(0)
+    pygame.draw.lines(screen, city_color, True, cities)
+    text = font.render("Meilleur chemin actuel %s" % length, True, font_color)
+    textRect = text.get_rect()
+    screen.blit(text, textRect)
+    pygame.display.flip()
+
 
 def showGUI():
-	global window, screen, font
-	pygame.init()
-	window = pygame.display.set_mode((screen_x, screen_y))
-	pygame.display.set_caption('Exemple')
-	screen = pygame.display.get_surface()
-	font = pygame.font.Font(None, 30)
+    global window, screen, font
+    pygame.init()
+    window = pygame.display.set_mode((screen_x, screen_y))
+    pygame.display.set_caption('Exemple')
+    screen = pygame.display.get_surface()
+    font = pygame.font.Font(None, 30)

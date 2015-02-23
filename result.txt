@@ -1,0 +1,236 @@
+N: 30
+MUTATION_PROB: 66
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 10
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);3403;
+data\pb050.txt (60s);3854;
+data\pb100.txt (20s);13261;
+data\pb100.txt (90s);9255;
+#####################
+
+N: 30
+MUTATION_PROB: 66
+SWAP_PROB: 66
+CROSSED_N: 15
+RANDOM_N: 10
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);3486;
+data\pb050.txt (60s);3649;
+data\pb100.txt (20s);12505;
+data\pb100.txt (90s);11070;
+#####################
+
+N: 30
+MUTATION_PROB: 66
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 15
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);3872;
+data\pb050.txt (60s);4010;
+data\pb100.txt (20s);14131;
+data\pb100.txt (90s);8471;
+#####################
+
+N: 12
+MUTATION_PROB: 66
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 8
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);4490;
+data\pb050.txt (60s);3686;
+data\pb100.txt (20s);12001;
+data\pb100.txt (90s);12442;
+#####################
+
+N: 12
+MUTATION_PROB: 66
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 4
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);4351;
+data\pb050.txt (60s);3679;
+data\pb100.txt (20s);10994;
+data\pb100.txt (90s);10153;
+#####################
+
+N: 12
+MUTATION_PROB: 66
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 2
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);4853;
+data\pb050.txt (60s);4238;
+data\pb100.txt (20s);12940;
+data\pb100.txt (90s);#####################
+
+N: 30
+MUTATION_PROB: 66
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 2
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);4137;
+data\pb050.txt (60s);4172;
+data\pb100.txt (20s);12333;
+data\pb100.txt (90s);#####################
+
+N: 30
+MUTATION_PROB: 66
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 10
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);4411;
+data\pb050.txt (60s);3873;
+data\pb100.txt (20s);12370;
+data\pb100.txt (90s);9750;
+#####################
+
+N: 30
+MUTATION_PROB: 66
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 20
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);4100;
+data\pb050.txt (60s);3619;
+data\pb100.txt (20s);13964;
+data\pb100.txt (90s);9558;
+#####################
+
+N: 30
+MUTATION_PROB: 66
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 10
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);4242;
+data\pb050.txt (60s);3824;
+data\pb100.txt (20s);12250;
+data\pb100.txt (90s);11424;
+#####################
+
+N: 30
+MUTATION_PROB: 66
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 10
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);4229;
+data\pb050.txt (60s);3877;
+data\pb100.txt (20s);13372;
+data\pb100.txt (90s);9727;
+#####################
+
+N: 50
+MUTATION_PROB: 33
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 10
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);3689;
+data\pb050.txt (60s);3920;
+data\pb100.txt (20s);13953;
+data\pb100.txt (90s);9454;
+#####################
+
+N: 50
+MUTATION_PROB: 66
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 10
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);3850;
+data\pb050.txt (60s);3645;
+data\pb100.txt (20s);14548;
+data\pb100.txt (90s);11290;
+#####################
+
+N: 50
+MUTATION_PROB: 50
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 10
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);3852;
+data\pb050.txt (60s);3546;
+data\pb100.txt (20s);13179;
+data\pb100.txt (90s);9045;
+#####################
+
+N: 50
+MUTATION_PROB: 50
+SWAP_PROB: 44
+CROSSED_N: 15
+RANDOM_N: 10
+DECAL_N: 15
+Test;BalandBolinhasMarigliano;
+data\pb005.txt (1s);903;
+data\pb010.txt (5s);1490;
+data\pb010.txt (10s);1490;
+data\pb050.txt (30s);4194;
+data\pb050.txt (60s);3607;
+data\pb100.txt (20s);14739;
+data\pb100.txt (90s);9098;

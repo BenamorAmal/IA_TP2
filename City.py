@@ -1,5 +1,6 @@
 class City:
-    """ Ville est une classe représentant une ville composé de points x et y
+    """
+    Ville est une classe représentant une ville composée de points x et y
     """
     counter = 0
 
